@@ -1,12 +1,24 @@
-browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+server-->browser: HTML-spa
 
-note over JavaScript:
-manage submit event
-prevent default behavior
-create an object with the new note
-add it to notes array
-renders the list
-send the new note to the server, the request contains the object with the note and data and it's sent to server in JSON format
+note over browser:
+HTML-spa requests main.css and spa.js
 end note
 
-server-->browser: 201 created
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+server-->browser: spa.js
+
+note over browser:
+spa.js requests data.json
+end note
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser: data.json
+browser->server: https://studies.cs.helsinki.fi/favicon.ico
+server-->browser: favicon.ico
+
+note over browser:
+JavaScript parses the notes list from data.json and renders the list to HTML-spa, every time a new note is added it does the same
+end note
